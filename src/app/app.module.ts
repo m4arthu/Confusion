@@ -9,13 +9,15 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatListModule } from '@angular/material/list';
+// services imports
+import { DishService } from './services/dish.service';
+import { PromotionService } from './services/promotion.service';
 
 // components imports 
 
 import 'hammerjs';
 import { MenuComponent } from './menu/menu.component';
 import { DishdetailComponent } from './menu/dishdetail/dishdetail.component'
-import { DishService } from './services/dish.service';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { HomeComponent } from './home/home.component';
@@ -46,7 +48,8 @@ import { ContactComponent } from './contact/contact.component';
     MatListModule
   ],
   providers: [ 
-    DishService
+    DishService,
+    PromotionService
   ],
   bootstrap: [AppComponent]
 })
