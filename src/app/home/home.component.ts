@@ -3,7 +3,8 @@ import { Promotion } from '../shared/promotion';
 import { PromotionService } from '../services/promotion.service';
 import { Dish } from '../shared/dish';
 import { DishService } from '../services/dish.service';
-
+import { Leaders } from '../shared/leader';
+import { LeadersService } from '../services/leaders.service';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -13,10 +14,11 @@ export class HomeComponent implements OnInit {
 
 dish: Dish
 promotion: Promotion
-
-constructor(private DishService: DishService, private PromotionService: PromotionService) {}  
+leader: Leaders
+constructor(private DishService: DishService, private PromotionService: PromotionService, private LeaderService: LeadersService) {}  
 ngOnInit(){
   this.dish = this.DishService.getFeaturedDish();
-  this.promotion = this.PromotionService.getFeaturedPromotion()
+  this.promotion = this.PromotionService.getFeaturedPromotion();
+  this.leader  = this.LeaderService.getFeaturedLeader()
 }
 }
