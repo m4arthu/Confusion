@@ -2,13 +2,18 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from '../app/app-routing/app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatToolbarModule } from   '@angular/material/toolbar'; 
+import { MatToolbarModule } from '@angular/material/toolbar'
 import { FlexLayoutModule } from '@angular/flex-layout' /** this module meke abble the angular to  organize the layout**/
 import { AppComponent } from './app.component';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatListModule } from '@angular/material/list';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { FormsModule } from '@angular/forms';
 
 
 // services imports
@@ -25,6 +30,7 @@ import { HomeComponent } from './home/home.component';
 import { AboutComponent } from './about/about.component';
 import { ContactComponent } from './contact/contact.component';
 import { LeadersService } from './services/leaders.service';
+import { LoginComponent } from './login/login.component';
 
 
 @NgModule({
@@ -37,6 +43,7 @@ import { LeadersService } from './services/leaders.service';
     HomeComponent,
     AboutComponent,
     ContactComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
@@ -48,11 +55,19 @@ import { LeadersService } from './services/leaders.service';
     MatCardModule,
     MatButtonModule,
     MatListModule,
+    MatDialogModule,
+    FormsModule,
+    MatCheckboxModule,
+    MatInputModule,
+    MatFormFieldModule
   ],
-  providers: [ 
+  providers: [
     DishService,
     PromotionService,
     LeadersService,
+  ],
+  entryComponents: [
+    LoginComponent
   ],
 
   bootstrap: [AppComponent]
