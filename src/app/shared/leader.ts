@@ -1,4 +1,4 @@
- export class Leaders {
+ export class Leader {
     id: string;
     name: string;
     image: string;

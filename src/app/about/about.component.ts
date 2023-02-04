@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Leaders } from '../shared/leader';
+import { Leader } from '../shared/leader';
 import { LeadersService } from '../services/leaders.service';
 
 @Component({
@@ -7,12 +7,13 @@ import { LeadersService } from '../services/leaders.service';
   templateUrl: './about.component.html',
   styleUrls: ['./about.component.scss']
 })
-export class AboutComponent implements OnInit{
- 
-  leaders: Leaders[]
+export class AboutComponent implements OnInit {
+  leaders: Leader[]
 
-    constructor(private LeadersService: LeadersService ) { }
-ngOnInit(){
-  this.leaders = this.LeadersService.getLeaders()
-}
-}
+  constructor(private LeadersService: LeadersService) { }
+  ngOnInit() {
+    this.LeadersService.getLeaders()
+      .then(leaders => this.leaders = leaders)
+      }
+  }
+
