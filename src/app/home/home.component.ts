@@ -18,15 +18,15 @@ leader: Leader
 constructor(private DishService: DishService, private PromotionService: PromotionService, private LeaderService: LeadersService) {}  
 ngOnInit(){
    this.DishService.getFeaturedDish()
-   .then((Dish) => {
+   .subscribe((Dish) => {
     this.dish = Dish 
    })
   this.PromotionService.getFeaturedPromotion()
-  .then((Promotion) => {
+  .subscribe((Promotion) => {
     this.promotion = Promotion
   })
   this.LeaderService.getFeaturedLeader()
-  .then((Leader) => {
+  .subscribe((Leader) => {
     this.leader = Leader
   })
 }
