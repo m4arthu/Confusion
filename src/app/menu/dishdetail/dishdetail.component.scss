@@ -1,0 +1,16 @@
+$primary-color:  #673AB7;
+  
+  .prevNextButton{
+    border: 0;
+    background: local;
+   
+  }
+
+  .prevNextButton:hover{
+    border: 0;
+    background: $primary-color;
+  }
+
+  .form-size{
+    width: 75%;
+  }

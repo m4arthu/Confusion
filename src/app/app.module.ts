@@ -18,8 +18,9 @@ import { ReactiveFormsModule } from '@angular/forms';
 import {MatSelectModule} from '@angular/material/select';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle'
 import {MatProgressSpinnerModule} from  '@angular/material/progress-spinner'
-
-
+import {MatSliderModule} from '@angular/material/slider';
+import {HttpClientModule} from '@angular/common/http';
+import { baseURL } from './shared/baseurl'
 // services imports
 import { DishService } from './services/dish.service';
 import { PromotionService } from './services/promotion.service';
@@ -67,12 +68,15 @@ import { LoginComponent } from './login/login.component';
     ReactiveFormsModule,
     MatSelectModule,
     MatSlideToggleModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatSliderModule,
+    HttpClientModule
   ],
   providers: [
     DishService,
     PromotionService,
     LeadersService,
+    { provide: 'baseURL', useValue: baseURL}
   ],
   entryComponents: [
     LoginComponent
