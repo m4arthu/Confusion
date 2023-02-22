@@ -1,7 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Comment } from 'src/app/shared/comments';
-import {comment} from 'src/app/shared/comment'
+import { comment } from 'src/app/shared/comment'
 import { Params, ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { Dish } from '../../shared/dish'
@@ -20,12 +19,14 @@ export class DishdetailComponent implements OnInit {
   dishIds: string[];
   prev: string;
   next: string;
+  errMsg: string
 
   // form variables
 
   CommentForm: FormGroup;
   comments: Comment;
-  comment:comment
+  comment: comment
+  dishCopy: Dish
 
 
   formErrors = {
@@ -36,8 +37,8 @@ export class DishdetailComponent implements OnInit {
   validationMessages = {
     'name': {
       'required': 'Name is required',
-      'minlength':'Name must be least more 2 caracthers',
-      'maxlength':'Name cannot be more than 25 caracthers!!'
+      'minlength': 'Name must be least more 2 caracthers',
+      'maxlength': 'Name cannot be more than 25 caracthers!!'
     },
     'comment': {
       'required': 'Comment is required',
@@ -58,14 +59,21 @@ export class DishdetailComponent implements OnInit {
     this.dishService.getDishIds().subscribe((dishIds) => this.dishIds = dishIds)
     this.route.params
       .pipe(switchMap((params: Params) => this.dishService.getDish(params['id'])))
-      .subscribe((dish) => { this.dish = dish; this.setPrevNext(this.dish.id); })
-    }
+      .subscribe({
+        next: (dish) => {
+          this.dish = dish;
+          this.setPrevNext(this.dish.id);
+          this.dishCopy = dish
+        },
+        error: (errmesg: any) => this.errMsg = errmesg
+      })
+  }
 
   createForm(): void {
     this.CommentForm = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(25)]],
       comment: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(200)]],
-      rating:[Number]
+      rating: [Number]
     })
 
     this.CommentForm.valueChanges.subscribe(data => this.onValueChanged(data))
@@ -97,13 +105,21 @@ export class DishdetailComponent implements OnInit {
   onSubmit(): void {
     this.comments = this.CommentForm.value;
     this.comment = {
-      rating: this.CommentForm.get('rating').value ,
-      author :this.CommentForm.get('name').value,
+      rating: this.CommentForm.get('rating').value,
+      author: this.CommentForm.get('name').value,
       comment: this.CommentForm.get('comment').value,
       date: Date.now().toString()
     }
-    this.dish.comments.push(this.comment);
+    this.dishCopy.comments.push(this.comment);
+    this.dishService.putDish(this.dishCopy)
+      .subscribe({
+        next: dish => {
+          this.dish = dish; this.dishCopy = dish;
+        },
+        error: errmess => { this.dish = null; this.dishCopy = null; this.errMsg = <any>errmess; }
+      });
     this.CommentForm.reset({
+      rating: 0,
       name: '',
       comment: ''
     })

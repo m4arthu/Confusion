@@ -24,6 +24,8 @@ import { baseURL } from './shared/baseurl'
 // services imports
 import { DishService } from './services/dish.service';
 import { PromotionService } from './services/promotion.service';
+import { ProcessHTTPMsgService } from './services/process-httpmsg.service';
+
 
 // components imports 
 import 'hammerjs';
@@ -36,6 +38,7 @@ import { AboutComponent } from './about/about.component';
 import { ContactComponent } from './contact/contact.component';
 import { LeadersService } from './services/leaders.service';
 import { LoginComponent } from './login/login.component';
+import { HighlightDirective } from './directives/highlight.directive';
 
 
 @NgModule({
@@ -49,6 +52,7 @@ import { LoginComponent } from './login/login.component';
     AboutComponent,
     ContactComponent,
     LoginComponent,
+    HighlightDirective,
   ],
   imports: [
     BrowserModule,
@@ -76,6 +80,7 @@ import { LoginComponent } from './login/login.component';
     DishService,
     PromotionService,
     LeadersService,
+    ProcessHTTPMsgService,
     { provide: 'baseURL', useValue: baseURL}
   ],
   entryComponents: [
